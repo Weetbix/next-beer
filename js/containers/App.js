@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import NavMap from '../components/NavMap';
 
-import * as RouteActions from './actions/route';
+import * as RouteActions from '../actions/route';
 
 class App extends React.Component {
   componentDidMount() {
