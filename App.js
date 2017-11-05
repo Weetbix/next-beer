@@ -1,6 +1,10 @@
-import App from './js/App';
+import App from './js/containers/App';
+import React from 'react';
+import {Provider} from 'react-redux';
+import configureStore from './js/store/configureStore';
 
-// There does not seem to be an easy way to reconfigure the entry
-// point for CRNA apps at the moment, so here we just re-export
-// our main app class from the js subfolder
-export default App;
+export default () => (
+  <Provider store={configureStore()}>
+    <App />
+  </Provider>
+);

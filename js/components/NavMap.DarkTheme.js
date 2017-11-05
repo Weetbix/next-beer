@@ -1,6 +1,5 @@
 // A dark black theme created with the google
 // maps theme creator
-
 export default [
   {
     elementType: 'geometry',
