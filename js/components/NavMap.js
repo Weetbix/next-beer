@@ -1,5 +1,4 @@
 import React from 'react';
-import Polyline from '@mapbox/polyline';
 import {MapView} from 'expo';
 import DarkTheme from './NavMap.DarkTheme';
 
