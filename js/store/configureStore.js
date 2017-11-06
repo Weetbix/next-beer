@@ -15,10 +15,12 @@ import rootReducer from '../reducers';
 // longitute :
 //     }
 //     route : {
+//
 //         isFetching : false
 //         polyLine :
 //         start :
 //         end :
+//         name : barname
 //     }
 //     previousBars : [
 //         Bar,

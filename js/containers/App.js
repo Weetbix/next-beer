@@ -46,9 +46,12 @@ class App extends React.Component {
       <View style={style.container}>
         <NavMap coords={this.props.route.points} />
         <View style={{padding: 10}}>
-          <Button title="Go!" onPress={() => this.generateRandomRoute()} />
+          <Button
+            title="Go!"
+            onPress={() => this.props.navigateToNextBar(this.props.location)}
+          />
         </View>
-        <NextBarLabel name="Laika" distance={300} />
+        <NextBarLabel name={this.props.route.name} distance={300} />
       </View>
     );
   }
@@ -78,6 +81,8 @@ function mapDispatchToProps(dispatch) {
   return {
     genRoute: (from, to) => dispatch(RouteActions.fetchRoute(from, to)),
     updateUserPosition: position => dispatch(updateLocation(position)),
+    navigateToNextBar: currentLocation =>
+      dispatch(RouteActions.navigateToNextBar(currentLocation)),
   };
 }
 

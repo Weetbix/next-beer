@@ -1,8 +1,8 @@
 import Polyline from '@mapbox/polyline';
 
 export async function getDirections(from, to) {
-  const startLoc = `${from.lat}, ${from.long}`;
-  const destinationLoc = `${to.lat}, ${to.long}`;
+  const startLoc = `${from.latitude}, ${from.longitude}`;
+  const destinationLoc = `${to.latitude}, ${to.longitude}`;
 
   try {
     let resp = await fetch(

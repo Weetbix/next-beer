@@ -1,4 +1,5 @@
 import {getDirections} from '../api/directions';
+import {getNextBar} from '../api/places';
 
 export const REQUEST_ROUTE = 'REQUEST_ROUTE';
 export const RECEIVE_ROUTE = 'RECEIVE_ROUTE';
@@ -32,6 +33,16 @@ export function fetchRoute(from, to) {
       dispatch(receiveRoute(points));
     } catch (error) {
       dispatch(receiveRouteFailed());
+    }
+  };
+}
+
+export function navigateToNextBar(currentLocation) {
+  return async dispatch => {
+    const nextBar = await getNextBar(currentLocation);
+
+    if (nextBar) {
+      dispatch(fetchRoute(currentLocation, nextBar.location));
     }
   };
 }

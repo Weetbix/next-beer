@@ -84,3 +84,6 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 .expo/packager-info.json
+
+# Secret API key
+js/api/places.api.key.js
