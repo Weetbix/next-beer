@@ -9,6 +9,11 @@ import rootReducer from '../reducers';
 //         name :
 //         id
 //     },
+//     location :
+//     {
+// latitude :
+// longitute :
+//     }
 //     route : {
 //         isFetching : false
 //         polyLine :
