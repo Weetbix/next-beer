@@ -1,8 +1,18 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import {Button, View} from 'react-native';
+
 import NavMap from '../components/NavMap';
+import NextBarLabel from '../components/NextBarLabel';
 
 import * as RouteActions from '../actions/route';
+
+const style = {
+  container: {
+    flex: 1,
+    backgroundColor: '#333',
+  },
+};
 
 class App extends React.Component {
   componentDidMount() {
@@ -20,12 +30,20 @@ class App extends React.Component {
         };
         this.props.genRoute(from, to);
       },
-      5000,
+      50000,
     );
   }
 
   render() {
-    return <NavMap coords={this.props.route.points} />;
+    return (
+      <View style={style.container}>
+        <NavMap coords={this.props.route.points} />
+        <View style={{padding: 10}}>
+          <Button title="Go!" onPress={() => true} />
+        </View>
+        <NextBarLabel name="Laika" distance={300} />
+      </View>
+    );
   }
 }
 
