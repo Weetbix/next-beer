@@ -2,6 +2,11 @@
 // maps theme creator
 export default [
   {
+    featureType: 'landscape.man_made',
+    elementType: 'geometry',
+    stylers: [{visibility: 'off'}],
+  },
+  {
     elementType: 'geometry',
     stylers: [
       {
