@@ -4,6 +4,7 @@ import {getNextBar} from '../api/places';
 export const REQUEST_ROUTE = 'REQUEST_ROUTE';
 export const RECEIVE_ROUTE = 'RECEIVE_ROUTE';
 export const RECEIVE_ROUTE_FAILED = 'RECEIVE_ROUTE_FAILED';
+export const UPDATE_BAR_NAME = 'UPDATE_BAR_NAME';
 
 export function requestRoute() {
   return {
@@ -11,16 +12,23 @@ export function requestRoute() {
   };
 }
 
-export function receiveRoute(points) {
+export function receiveRoute(route) {
   return {
     type: RECEIVE_ROUTE,
-    points,
+    route,
   };
 }
 
 export function receiveRouteFailed() {
   return {
     type: RECEIVE_ROUTE_FAILED,
+  };
+}
+
+export function updateBarName(name) {
+  return {
+    type: UPDATE_BAR_NAME,
+    name,
   };
 }
 
@@ -42,6 +50,7 @@ export function navigateToNextBar(currentLocation) {
     const nextBar = await getNextBar(currentLocation);
 
     if (nextBar) {
+      dispatch(updateBarName(nextBar.name));
       dispatch(fetchRoute(currentLocation, nextBar.location));
     }
   };

@@ -18,8 +18,8 @@ import rootReducer from '../reducers';
 //
 //         isFetching : false
 //         polyLine :
-//         start :
-//         end :
+//         distance :
+//         duration :
 //         name : barname
 //     }
 //     previousBars : [

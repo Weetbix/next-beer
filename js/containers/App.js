@@ -51,7 +51,11 @@ class App extends React.Component {
             onPress={() => this.props.navigateToNextBar(this.props.location)}
           />
         </View>
-        <NextBarLabel name={this.props.route.name} distance={300} />
+        <NextBarLabel
+          name={this.props.route.name}
+          distance={this.props.route.distance}
+          duration={this.props.route.duration}
+        />
       </View>
     );
   }

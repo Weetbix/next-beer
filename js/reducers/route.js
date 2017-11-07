@@ -10,7 +10,7 @@ export function route(state = defaultState, action) {
     case Actions.RECEIVE_ROUTE:
       return {
         ...state,
-        points: action.points,
+        ...action.route,
         isFetching: false,
       };
     case Actions.REQUEST_ROUTE:
@@ -22,6 +22,11 @@ export function route(state = defaultState, action) {
       return {
         ...state,
         isFetching: false,
+      };
+    case Actions.UPDATE_BAR_NAME:
+      return {
+        ...state,
+        name: action.name,
       };
     default:
       return state;

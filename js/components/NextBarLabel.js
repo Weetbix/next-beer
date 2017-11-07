@@ -8,24 +8,39 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   text: {
+    color: '#DDD',
+  },
+  barName: {
+    fontWeight: 'bold',
     color: 'white',
+    fontSize: 20,
   },
 });
 
 export default class NextBarLabel extends React.Component {
   render() {
-    const {name, distance} = this.props;
+    const {name, distance, duration} = this.props;
 
-    const text = name && distance
-      ? `${name} (${distance}m)`
-      : 'Find the next beer!';
-
-    return (
-      <View style={styles.container}>
-        <Text style={styles.text}>
-          {text}
-        </Text>
-      </View>
-    );
+    if (name && distance && duration) {
+      return (
+        <View style={styles.container}>
+          <Text style={styles.text}>
+            {duration + ' to '}
+            <Text style={styles.barName}>
+              {name}
+            </Text>
+            {', ' + distance}
+          </Text>
+        </View>
+      );
+    } else {
+      return (
+        <View style={styles.container}>
+          <Text style={styles.text}>
+            Find the next beer!
+          </Text>
+        </View>
+      );
+    }
   }
 }
