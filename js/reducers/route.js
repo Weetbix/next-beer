@@ -11,6 +11,7 @@ export function route(state = defaultState, action) {
       return {
         ...state,
         ...action.route,
+        destination: action.destination,
         isFetching: false,
       };
     case Actions.REQUEST_ROUTE:

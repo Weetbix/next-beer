@@ -12,10 +12,11 @@ export function requestRoute() {
   };
 }
 
-export function receiveRoute(route) {
+export function receiveRoute(route, destination) {
   return {
     type: RECEIVE_ROUTE,
     route,
+    destination,
   };
 }
 
@@ -38,7 +39,7 @@ export function fetchRoute(from, to) {
 
     try {
       const points = await getDirections(from, to);
-      dispatch(receiveRoute(points));
+      dispatch(receiveRoute(points, to));
     } catch (error) {
       dispatch(receiveRouteFailed());
     }

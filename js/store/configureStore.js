@@ -21,6 +21,7 @@ import rootReducer from '../reducers';
 //         distance :
 //         duration :
 //         name : barname
+//         destination : { coords }
 //     }
 //     previousBars : [
 //         Bar,

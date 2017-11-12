@@ -13,23 +13,22 @@ const MAP_EDGE_PADDING = {
   left: 200,
 };
 
+const COORDINATE_PROPTYPE = PropTypes.shape({
+  longitude: PropTypes.number.isRequired,
+  latitude: PropTypes.number.isRequired,
+});
+
 export default class NavMap extends React.Component {
   static propTypes = {
     // The initial center for the map, this will only be
     // used on initial display of the map
-    initialCenter: PropTypes.shape({
-      longitude: PropTypes.number.isRequired,
-      latitude: PropTypes.number.isRequired,
-    }).isRequired,
+    initialCenter: COORDINATE_PROPTYPE.isRequired,
 
-    // An array of long/lat points which will be drawn
-    // on the map
-    coords: PropTypes.arrayOf(
-      PropTypes.shape({
-        longitude: PropTypes.number.isRequired,
-        latitude: PropTypes.number.isRequired,
-      }),
-    ).isRequired,
+    // An array of long/lat points which will be drawn on the map
+    coords: PropTypes.arrayOf(COORDINATE_PROPTYPE).isRequired,
+
+    // The cooridnates of the destination
+    destination: COORDINATE_PROPTYPE,
   };
 
   componentWillReceiveProps(nextProps) {
@@ -43,11 +42,21 @@ export default class NavMap extends React.Component {
   }
 
   render() {
+    const {
+      initialCenter,
+      coords,
+      destination,
+    } = this.props;
+
     const initialRegion = {
-      ...this.props.initialCenter,
+      ...initialCenter,
       latitudeDelta: 0.01,
       longitudeDelta: 0.01,
     };
+
+    // Create a path which joins the last point to the
+    // actual destination point
+    const path = coords.length > 0 ? [...coords, destination] : [];
 
     return (
       <MapView
@@ -60,26 +69,19 @@ export default class NavMap extends React.Component {
         showsMyLocationButton={false}
         initialRegion={initialRegion}
       >
-        {this.props.coords.length > 0 &&
+        {coords.length > 0 &&
           <MapView.Marker
-            coordinate={{
-              latitude: this.props.coords[
-                this.props.coords.length - 1
-              ].latitude,
-              longitude: this.props.coords[
-                this.props.coords.length - 1
-              ].longitude,
-            }}
+            coordinate={destination}
             image={require('../../assets/beer.png')}
             anchor={{x: 0.5, y: 0.5}}
           />}
         <MapView.Polyline
-          coordinates={this.props.coords}
+          coordinates={path}
           strokeWidth={8}
           strokeColor="#FFFFFF77"
         />
         <MapView.Polyline
-          coordinates={this.props.coords}
+          coordinates={path}
           strokeWidth={5}
           strokeColor="#f4ce42"
         />
