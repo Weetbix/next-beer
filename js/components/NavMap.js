@@ -29,6 +29,7 @@ export default class NavMap extends React.Component {
         style={{flex: 1}}
         customMapStyle={DarkTheme}
         showsUserLocation={true}
+        showsMyLocationButton={false}
         initialRegion={{
           latitude: 52.4685913,
           longitude: 13.4309139,
