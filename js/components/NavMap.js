@@ -2,6 +2,15 @@ import React from 'react';
 import {MapView} from 'expo';
 import DarkTheme from './NavMap.DarkTheme';
 
+// How much padding to put around the edge of the
+// map when fitting to the navigation path
+const MAP_EDGE_PADDING = {
+  top: 200,
+  right: 200,
+  bottom: 200,
+  left: 200,
+};
+
 export default class NavMap extends React.Component {
   componentWillReceiveProps(nextProps) {
     if (
@@ -9,12 +18,7 @@ export default class NavMap extends React.Component {
     ) {
       // fit to new coords
       this.mapView.fitToCoordinates(nextProps.coords, {
-        edgePadding: {
-          top: 100,
-          right: 100,
-          bottom: 100,
-          left: 100,
-        },
+        edgePadding: MAP_EDGE_PADDING,
         animated: true,
       });
     }
@@ -34,7 +38,7 @@ export default class NavMap extends React.Component {
         }}
         style={{flex: 1}}
         customMapStyle={DarkTheme}
-        showsUserLocation={true}
+        showsUserLocation
         showsMyLocationButton={false}
         initialRegion={initialRegion}
       >
