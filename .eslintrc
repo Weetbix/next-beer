@@ -9,7 +9,9 @@
         // adding it as a dependency
         "import/no-extraneous-dependencies": "off",
         // This rule is just stupid, doenst let you import paths
-        "import/no-namespace": "off"
+        "import/no-namespace": "off",
+        // Disable as its preferable to have named exports in some instances
+        "import/prefer-default-export": "off"
     },
     "settings": {
         "import/ignore": [
