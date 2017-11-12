@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {MapView} from 'expo';
 import DarkTheme from './NavMap.DarkTheme';
 import isEqual from 'lodash/isEqual';
@@ -13,6 +14,24 @@ const MAP_EDGE_PADDING = {
 };
 
 export default class NavMap extends React.Component {
+  static propTypes = {
+    // The initial center for the map, this will only be
+    // used on initial display of the map
+    initialCenter: PropTypes.shape({
+      longitude: PropTypes.number.isRequired,
+      latitude: PropTypes.number.isRequired,
+    }).isRequired,
+
+    // An array of long/lat points which will be drawn
+    // on the map
+    coords: PropTypes.arrayOf(
+      PropTypes.shape({
+        longitude: PropTypes.number.isRequired,
+        latitude: PropTypes.number.isRequired,
+      }),
+    ).isRequired,
+  };
+
   componentWillReceiveProps(nextProps) {
     if (!isEqual(this.props.coords, nextProps.coords)) {
       // fit to new coords
