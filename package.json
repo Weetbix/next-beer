@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
+    "babel-eslint": "^8.0.2",
     "eslint": "^4.11.0",
     "eslint-config-esnext": "~1.6.0",
     "eslint-config-import": "^0.13.0",
