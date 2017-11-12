@@ -1,6 +1,6 @@
 import * as Actions from '../actions/location';
 
-export function location(state = {}, action) {
+export function location(state = null, action) {
   switch (action.type) {
     case Actions.UPDATE_LOCATION:
       return {

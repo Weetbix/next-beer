@@ -21,6 +21,12 @@ export default class NavMap extends React.Component {
   }
 
   render() {
+    const initialRegion = {
+      ...this.props.initialCenter,
+      latitudeDelta: 0.01,
+      longitudeDelta: 0.01,
+    };
+
     return (
       <MapView
         ref={c => {
@@ -30,12 +36,7 @@ export default class NavMap extends React.Component {
         customMapStyle={DarkTheme}
         showsUserLocation={true}
         showsMyLocationButton={false}
-        initialRegion={{
-          latitude: 52.4685913,
-          longitude: 13.4309139,
-          latitudeDelta: 0.01,
-          longitudeDelta: 0.01,
-        }}
+        initialRegion={initialRegion}
       >
         {this.props.coords.length > 0 &&
           <MapView.Marker

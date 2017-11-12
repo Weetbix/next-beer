@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Button, View, Alert} from 'react-native';
-import {Location, Permissions} from 'expo';
+import {Location, Permissions, AppLoading} from 'expo';
 
 import NavMap from '../components/NavMap';
 import NextBarLabel from '../components/NextBarLabel';
@@ -42,9 +42,17 @@ class App extends React.Component {
   }
 
   render() {
+    // Hang on the app loading page until we fetch the location
+    if (this.props.location === null) {
+      return <AppLoading />;
+    }
+
     return (
       <View style={style.container}>
-        <NavMap coords={this.props.route.points} />
+        <NavMap
+          initialCenter={this.props.location}
+          coords={this.props.route.points}
+        />
         <View style={{padding: 10}}>
           <Button
             title="Go!"
