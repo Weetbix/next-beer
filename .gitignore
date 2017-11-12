@@ -85,5 +85,9 @@ $RECYCLE.BIN/
 *.lnk
 .expo/packager-info.json
 
+# Expo app
+.expo/
+npm-debug.*
+
 # Secret API key
 js/api/places.api.key.js
