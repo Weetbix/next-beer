@@ -1,6 +1,7 @@
 import React from 'react';
 import {MapView} from 'expo';
 import DarkTheme from './NavMap.DarkTheme';
+import isEqual from 'lodash/isEqual';
 
 // How much padding to put around the edge of the
 // map when fitting to the navigation path
@@ -13,9 +14,7 @@ const MAP_EDGE_PADDING = {
 
 export default class NavMap extends React.Component {
   componentWillReceiveProps(nextProps) {
-    if (
-      JSON.stringify(this.props.coords) !== JSON.stringify(nextProps.coords)
-    ) {
+    if (!isEqual(this.props.coords, nextProps.coords)) {
       // fit to new coords
       this.mapView.fitToCoordinates(nextProps.coords, {
         edgePadding: MAP_EDGE_PADDING,
