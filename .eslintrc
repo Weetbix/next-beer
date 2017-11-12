@@ -1,0 +1,19 @@
+{
+    "extends": [
+        "react-native"
+    ],
+    "rules": {
+        // Disable this because expo allows us to import 
+        // things such as react native maps etc without 
+        // adding it as a dependency
+        "import/no-extraneous-dependencies": "off",
+        // This rule is just stupid, doenst let you import paths
+        "import/no-namespace": "off"
+    },
+    "settings": {
+        "import/ignore": [
+            "expo",
+            "react-redux"
+        ]
+    }
+}
