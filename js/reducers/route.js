@@ -11,7 +11,8 @@ export function route(state = defaultState, action) {
       return {
         ...state,
         ...action.route,
-        destination: action.destination,
+        location: action.location,
+        name: action.name,
         isFetching: false,
       };
     case Actions.REQUEST_ROUTE:
@@ -23,11 +24,6 @@ export function route(state = defaultState, action) {
       return {
         ...state,
         isFetching: false,
-      };
-    case Actions.UPDATE_BAR_NAME:
-      return {
-        ...state,
-        name: action.name,
       };
     default:
       return state;

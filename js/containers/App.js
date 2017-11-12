@@ -52,7 +52,7 @@ class App extends React.Component {
         <NavMap
           initialCenter={this.props.location}
           coords={this.props.route.points}
-          destination={this.props.route.destination}
+          destination={this.props.route.location}
         />
         <View style={{padding: 10}}>
           <Button
