@@ -1,9 +1,9 @@
 import {combineReducers} from 'redux';
 
-import {route} from './route';
+import {bar} from './bar';
 import {location} from './location';
 
 export default combineReducers({
-  route,
+  bar,
   location,
 });

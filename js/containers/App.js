@@ -6,7 +6,7 @@ import {Location, Permissions, AppLoading} from 'expo';
 import NavMap from '../components/NavMap';
 import NextBarLabel from '../components/NextBarLabel';
 
-import * as RouteActions from '../actions/route';
+import * as BarActions from '../actions/bar';
 import {updateLocation} from '../actions/location';
 
 const style = {
@@ -42,28 +42,30 @@ class App extends React.Component {
   }
 
   render() {
+    const {location, bar} = this.props;
+
     // Hang on the app loading page until we fetch the location
-    if (this.props.location === null) {
+    if (location === null) {
       return <AppLoading />;
     }
 
     return (
       <View style={style.container}>
         <NavMap
-          initialCenter={this.props.location}
-          coords={this.props.route.points}
-          destination={this.props.route.location}
+          initialCenter={location}
+          coords={bar.points}
+          destination={bar.location}
         />
         <View style={{padding: 10}}>
           <Button
             title="Go!"
-            onPress={() => this.props.navigateToNextBar(this.props.location)}
+            onPress={() => this.props.navigateToNextBar(location)}
           />
         </View>
         <NextBarLabel
-          name={this.props.route.name}
-          distance={this.props.route.distance}
-          duration={this.props.route.duration}
+          name={bar.name}
+          distance={bar.distance}
+          duration={bar.duration}
         />
       </View>
     );
@@ -72,17 +74,16 @@ class App extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    route: state.route,
+    bar: state.bar,
     location: state.location,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    genRoute: (from, to) => dispatch(RouteActions.fetchRoute(from, to)),
     updateUserPosition: position => dispatch(updateLocation(position)),
     navigateToNextBar: currentLocation =>
-      dispatch(RouteActions.navigateToNextBar(currentLocation)),
+      dispatch(BarActions.navigateToNextBar(currentLocation)),
   };
 }
 

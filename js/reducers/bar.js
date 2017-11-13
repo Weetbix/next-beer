@@ -1,13 +1,13 @@
-import * as Actions from '../actions/route';
+import * as Actions from '../actions/bar';
 
 const defaultState = {
   isFetching: false,
   points: [],
 };
 
-export function route(state = defaultState, action) {
+export function bar(state = defaultState, action) {
   switch (action.type) {
-    case Actions.RECEIVE_ROUTE:
+    case Actions.RECEIVE_BAR:
       return {
         ...state,
         ...action.route,
@@ -15,12 +15,12 @@ export function route(state = defaultState, action) {
         name: action.name,
         isFetching: false,
       };
-    case Actions.REQUEST_ROUTE:
+    case Actions.REQUEST_BAR:
       return {
         ...state,
         isFetching: true,
       };
-    case Actions.RECEIVE_ROUTE_FAILED:
+    case Actions.RECEIVE_BAR_FAILED:
       return {
         ...state,
         isFetching: false,
