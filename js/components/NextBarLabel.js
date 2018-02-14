@@ -11,9 +11,7 @@ const styles = StyleSheet.create({
     color: '#DDD',
   },
   barName: {
-    fontWeight: 'bold',
     color: 'white',
-    fontSize: 20,
   },
 });
 
@@ -33,14 +31,13 @@ export default class NextBarLabel extends React.Component {
           </Text>
         </View>
       );
-    } else {
-      return (
-        <View style={styles.container}>
-          <Text style={styles.text}>
-            Find the next beer!
-          </Text>
-        </View>
-      );
     }
+    return (
+      <View style={styles.container}>
+        <Text style={styles.text}>
+          Find the next beer!
+        </Text>
+      </View>
+    );
   }
 }
