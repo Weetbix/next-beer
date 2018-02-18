@@ -71,17 +71,24 @@ class App extends React.Component {
             coords={bar.points}
             destination={bar.location}
           />
-          <View style={{padding: 10}}>
-            <Button
-              title="Go!"
-              onPress={() => this.props.navigateToNextBar(location)}
-            />
+          <View style={{flexDirection: 'row'}}>
+            <View style={{padding: 10}}>
+              <Button title="..." />
+            </View>
+            <View style={{flex: 1}}>
+              <NextBarLabel
+                name={bar.name}
+                distance={bar.distance}
+                duration={bar.duration}
+              />
+            </View>
+            <View style={{padding: 10}}>
+              <Button
+                title="Go!"
+                onPress={() => this.props.navigateToNextBar(location)}
+              />
+            </View>
           </View>
-          <NextBarLabel
-            name={bar.name}
-            distance={bar.distance}
-            duration={bar.duration}
-          />
         </View>
       </DrawerLayoutAndroid>
     );
