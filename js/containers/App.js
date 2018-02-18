@@ -1,8 +1,16 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {Button, View, Alert} from 'react-native';
+import {
+  Button,
+  View,
+  Alert,
+  DrawerLayoutAndroid,
+  Platform,
+  StatusBar,
+} from 'react-native';
 import {Location, Permissions, AppLoading} from 'expo';
 
+import Settings from './Settings';
 import NavMap from '../components/NavMap';
 import NextBarLabel from '../components/NextBarLabel';
 
@@ -13,6 +21,7 @@ const style = {
   container: {
     flex: 1,
     backgroundColor: '#333',
+    paddingTop: Platform.OS === 'ios' ? 0 : StatusBar.currentHeight,
   },
 };
 
@@ -50,24 +59,31 @@ class App extends React.Component {
     }
 
     return (
-      <View style={style.container}>
-        <NavMap
-          initialCenter={location}
-          coords={bar.points}
-          destination={bar.location}
-        />
-        <View style={{padding: 10}}>
-          <Button
-            title="Go!"
-            onPress={() => this.props.navigateToNextBar(location)}
+      <DrawerLayoutAndroid
+        drawerWidth={300}
+        drawerPosition={DrawerLayoutAndroid.positions.Left}
+        drawerLockMode="locked-open"
+        renderNavigationView={() => <Settings />}
+      >
+        <View style={style.container}>
+          <NavMap
+            initialCenter={location}
+            coords={bar.points}
+            destination={bar.location}
+          />
+          <View style={{padding: 10}}>
+            <Button
+              title="Go!"
+              onPress={() => this.props.navigateToNextBar(location)}
+            />
+          </View>
+          <NextBarLabel
+            name={bar.name}
+            distance={bar.distance}
+            duration={bar.duration}
           />
         </View>
-        <NextBarLabel
-          name={bar.name}
-          distance={bar.distance}
-          duration={bar.duration}
-        />
-      </View>
+      </DrawerLayoutAndroid>
     );
   }
 }
