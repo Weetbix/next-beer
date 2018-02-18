@@ -26,6 +26,10 @@ const style = {
 };
 
 class App extends React.Component {
+  // static navigationOptions = {
+  //   header: null,
+  // };
+
   async componentDidMount() {
     // Check for location permissions
     const {status} = await Permissions.askAsync(Permissions.LOCATION);
@@ -73,7 +77,10 @@ class App extends React.Component {
           />
           <View style={{flexDirection: 'row'}}>
             <View style={{padding: 10}}>
-              <Button title="..." />
+              <Button
+                title="..."
+                onPress={() => this.props.navigation.navigate('Settings')}
+              />
             </View>
             <View style={{flex: 1}}>
               <NextBarLabel
