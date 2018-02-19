@@ -38,6 +38,13 @@ const style = {
   },
 };
 
+function formatDistance(metres) {
+  if (metres >= 1000) {
+    return `${(metres / 1000).toFixed(1)} km`;
+  }
+  return `${metres} m`;
+}
+
 class Settings extends React.Component {
   render() {
     const DISTANCE_STEP = 100;
@@ -53,6 +60,7 @@ class Settings extends React.Component {
           value={minimumBarDistance}
           minimumValue={Constants.MIN_BAR_DISTANCE}
           maximumValue={maximumBarDistance}
+          formatValue={formatDistance}
           step={DISTANCE_STEP}
           onValueChange={val => this.props.setMinimumBarDistance(val)}
         />
@@ -61,6 +69,7 @@ class Settings extends React.Component {
           value={maximumBarDistance}
           minimumValue={minimumBarDistance}
           maximumValue={Constants.MAX_BAR_DISTANCE}
+          formatValue={formatDistance}
           step={DISTANCE_STEP}
           onValueChange={val => this.props.setMaximumBarDistance(val)}
         />
