@@ -7,8 +7,10 @@ import {
   DrawerLayoutAndroid,
   Platform,
   StatusBar,
+  TouchableOpacity,
 } from 'react-native';
 import {Location, Permissions, AppLoading} from 'expo';
+import {Ionicons} from '@expo/vector-icons';
 
 import Settings from './Settings';
 import NavMap from '../components/NavMap';
@@ -77,10 +79,11 @@ class App extends React.Component {
           />
           <View style={{flexDirection: 'row'}}>
             <View style={{padding: 10}}>
-              <Button
-                title="..."
+              <TouchableOpacity
                 onPress={() => this.props.navigation.navigate('Settings')}
-              />
+              >
+                <Ionicons name="md-settings" size={35} color="#DDD" />
+              </TouchableOpacity>
             </View>
             <View style={{flex: 1}}>
               <NextBarLabel
