@@ -5,7 +5,10 @@ import Text from './Text';
 const style = {
   container: {
     marginTop: 10,
-    marginBottom: 10,
+    marginBottom: 15,
+  },
+  slider: {
+    marginTop: 10,
   },
 };
 
@@ -30,6 +33,7 @@ export default class Slider extends React.Component {
           {...sliderProps}
           thumbTintColor={'#2096f2'}
           minimumTrackTintColor={'#2096f2'}
+          style={style.slider}
         />
       </View>
     );
