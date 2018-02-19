@@ -16,6 +16,10 @@ const Navigator = StackNavigator({
   Settings: {
     screen: Settings,
     navigationOptions: {
+      headerStyle: {
+        backgroundColor: '#2096f2',
+      },
+      headerTintColor: '#fff',
       title: 'Settings',
       headerTitleStyle: {
         // For some reason we need to set a width for the
