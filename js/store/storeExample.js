@@ -16,4 +16,9 @@ store = {
       longitude: 23.5,
     },
   },
+  // User settings
+  settings: {
+    minimumBarDistance: 30, // metres
+    maximumBarDistance: 40,
+  },
 };

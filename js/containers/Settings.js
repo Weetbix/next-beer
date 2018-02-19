@@ -13,6 +13,8 @@ import {
 import HeaderText from '../components/base/HeaderText';
 import Slider from '../components/base/Slider';
 
+import * as SettingsActions from '../actions/settings';
+
 const style = {
   container: {
     backgroundColor: '#333',
@@ -37,27 +39,34 @@ const style = {
 
 class Settings extends React.Component {
   render() {
+    const {
+      minimumBarDistance,
+      maximumBarDistance,
+    } = this.props;
+
     return (
       <View style={style.container}>
-        <Slider label="Minimum bar distance" />
-        <Slider label="Maximum bar distance" />
+        <Slider label="Minimum bar distance" value={minimumBarDistance} />
+        <Slider label="Maximum bar distance" value={maximumBarDistance} />
       </View>
     );
   }
 }
 
 function mapStateToProps(state) {
+  const {settings} = state;
   return {
-    // bar: state.bar.points,
-    // location: state.location,
+    minimumBarDistance: settings.minimumBarDistance,
+    maximumBarDistance: settings.maximumBarDistance,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    // updateUserPosition: position => dispatch(updateLocation(position)),
-    // navigateToNextBar: currentLocation =>
-    //   dispatch(BarActions.navigateToNextBar(currentLocation)),
+    setMinimumBarDistance: metres =>
+      dispatch(SettingsActions.setMinimumBarDistance(metres)),
+    setMaximumBarDistance: metres =>
+      dispatch(SettingsActions.setMaximumBarDistance(metres)),
   };
 }
 
