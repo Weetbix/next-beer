@@ -17,7 +17,7 @@ const style = {
   container: {
     backgroundColor: '#333',
     flex: 1,
-    padding: 80,
+    padding: 20,
     paddingTop: Platform.OS === 'ios' ? 20 : StatusBar.currentHeight + 20,
   },
   text: {
@@ -40,10 +40,8 @@ class Settings extends React.Component {
   render() {
     return (
       <View style={style.container}>
-        <HeaderText style={{fontWeight: 'bold'}}>
-          Settings
-        </HeaderText>
-
+        <Slider />
+        <Slider />
         <Slider />
       </View>
     );

@@ -21,7 +21,11 @@ export default class Slider extends React.Component {
         <Text>
           {`${label}: ${this.props.value}`}
         </Text>
-        <NativeSlider {...sliderProps} />
+        <NativeSlider
+          {...sliderProps}
+          thumbTintColor={'#2096f2'}
+          minimumTrackTintColor={'#2096f2'}
+        />
       </View>
     );
   }
