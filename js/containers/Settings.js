@@ -10,6 +10,7 @@ import {
   Switch,
 } from 'react-native';
 
+import * as Constants from '../constants';
 import HeaderText from '../components/base/HeaderText';
 import Slider from '../components/base/Slider';
 
@@ -39,6 +40,7 @@ const style = {
 
 class Settings extends React.Component {
   render() {
+    const DISTANCE_STEP = 100;
     const {
       minimumBarDistance,
       maximumBarDistance,
@@ -46,8 +48,22 @@ class Settings extends React.Component {
 
     return (
       <View style={style.container}>
-        <Slider label="Minimum bar distance" value={minimumBarDistance} />
-        <Slider label="Maximum bar distance" value={maximumBarDistance} />
+        <Slider
+          label="Minimum bar distance"
+          value={minimumBarDistance}
+          minimumValue={Constants.MIN_BAR_DISTANCE}
+          maximumValue={maximumBarDistance}
+          step={DISTANCE_STEP}
+          onValueChange={val => this.props.setMinimumBarDistance(val)}
+        />
+        <Slider
+          label="Maximum bar distance"
+          value={maximumBarDistance}
+          minimumValue={minimumBarDistance}
+          maximumValue={Constants.MAX_BAR_DISTANCE}
+          step={DISTANCE_STEP}
+          onValueChange={val => this.props.setMaximumBarDistance(val)}
+        />
       </View>
     );
   }
