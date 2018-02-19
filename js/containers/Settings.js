@@ -28,7 +28,6 @@ const style = {
     fontStyle: 'bold',
   },
   setting: {
-    // flex: 1
     alignItems: 'center',
     flexDirection: 'row',
     height: 40,
@@ -40,9 +39,8 @@ class Settings extends React.Component {
   render() {
     return (
       <View style={style.container}>
-        <Slider />
-        <Slider />
-        <Slider />
+        <Slider label="Minimum bar distance" />
+        <Slider label="Maximum bar distance" />
       </View>
     );
   }
