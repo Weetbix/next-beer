@@ -15,6 +15,7 @@ import HeaderText from '../components/base/HeaderText';
 import Slider from '../components/base/Slider';
 
 import * as SettingsActions from '../actions/settings';
+import {resetStore} from '../actions/reset';
 
 const style = {
   container: {
@@ -73,6 +74,7 @@ class Settings extends React.Component {
           step={DISTANCE_STEP}
           onValueChange={val => this.props.setMaximumBarDistance(val)}
         />
+        <Button title="Reset App" onPress={() => this.props.resetStore()} />
       </View>
     );
   }
@@ -92,6 +94,7 @@ function mapDispatchToProps(dispatch) {
       dispatch(SettingsActions.setMinimumBarDistance(metres)),
     setMaximumBarDistance: metres =>
       dispatch(SettingsActions.setMaximumBarDistance(metres)),
+    resetStore: () => dispatch(resetStore()),
   };
 }
 

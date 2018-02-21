@@ -28,9 +28,15 @@ const style = {
 };
 
 class App extends React.Component {
-  // static navigationOptions = {
-  //   header: null,
-  // };
+  // Takes the result of an expo location update
+  // and fires the update user position event
+  handleLocationEvent(result) {
+    const {latitude, longitude} = result.coords;
+    this.props.updateUserPosition({
+      latitude,
+      longitude,
+    });
+  }
 
   async componentDidMount() {
     // Check for location permissions
@@ -46,14 +52,23 @@ class App extends React.Component {
         enableHighAccuracy: true,
         timeInterval: 100,
       },
-      result => {
-        const {latitude, longitude} = result.coords;
-        this.props.updateUserPosition({
-          latitude,
-          longitude,
-        });
-      },
+      result => this.handleLocationEvent(result),
     );
+  }
+
+  componentWillReceiveProps(nextProps) {
+    // If the location has been erased (by resetting the app)
+    // we should fetch a new location now.
+    // Note: This may not be the ideal way to handle this. It may
+    // be better to handle reset in every reducer and choose not
+    // to reset the location.
+    if (nextProps.location === null) {
+      Location.getCurrentPositionAsync({
+        enableHighAccuracy: true,
+        // On android, allow 20 second old locations
+        maximumAge: 1000 * 20,
+      }).then(result => this.handleLocationEvent(result));
+    }
   }
 
   render() {
@@ -61,6 +76,11 @@ class App extends React.Component {
 
     // Hang on the app loading page until we fetch the location
     if (location === null) {
+      // Note, this isn't ideal, as the AppLoading component only
+      // works nicely if its the FIRST component rendered. However
+      // when we reset the state, this will be shown again, resulting
+      // in a white screen. Update to use our own loading screen or some
+      // jazz here instead.
       return <AppLoading />;
     }
 

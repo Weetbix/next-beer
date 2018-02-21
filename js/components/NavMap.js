@@ -32,7 +32,11 @@ export default class NavMap extends React.Component {
   };
 
   componentWillReceiveProps(nextProps) {
-    if (!isEqual(this.props.coords, nextProps.coords)) {
+    if (
+      !isEqual(this.props.coords, nextProps.coords) &&
+      nextProps.coords &&
+      nextProps.coords.length > 0
+    ) {
       // fit to new coords
       this.mapView.fitToCoordinates(nextProps.coords, {
         edgePadding: MAP_EDGE_PADDING,
