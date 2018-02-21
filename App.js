@@ -1,8 +1,12 @@
+import React from 'react';
+
+import {AppLoading} from 'expo';
 import App from './js/containers/App';
 import Settings from './js/containers/Settings';
-import React from 'react';
+
 import {Provider} from 'react-redux';
 import configureStore from './js/store/configureStore';
+import {PersistGate} from 'redux-persist/integration/react';
 
 import {StackNavigator} from 'react-navigation';
 
@@ -30,8 +34,17 @@ const Navigator = StackNavigator({
   },
 });
 
-export default () => (
-  <Provider store={configureStore()}>
-    <Navigator />
-  </Provider>
-);
+export default () => {
+  const {
+    store,
+    persistor,
+  } = configureStore();
+
+  return (
+    <Provider store={store}>
+      <PersistGate loading={<AppLoading />} persistor={persistor}>
+        <Navigator />
+      </PersistGate>
+    </Provider>
+  );
+};
