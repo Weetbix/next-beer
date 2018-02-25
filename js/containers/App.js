@@ -115,6 +115,7 @@ class App extends React.Component {
             <View style={{padding: 10}}>
               <Button
                 title="Go!"
+                disabled={this.props.bar.isFetching}
                 onPress={() => this.props.navigateToNextBar(location)}
               />
             </View>

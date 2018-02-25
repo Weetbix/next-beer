@@ -28,18 +28,21 @@ export function receiveBarFailed() {
 
 export function navigateToNextBar(currentLocation) {
   return async dispatch => {
+    dispatch(requestBar());
     const nextBar = await getNextBar(currentLocation);
 
     if (nextBar) {
-      dispatch(requestBar());
-
       try {
         const {name, location: destination} = nextBar;
         const route = await getDirections(currentLocation, destination);
         dispatch(receiveBar(route, destination, name));
       } catch (error) {
+        // We couldn't find a path
         dispatch(receiveBarFailed());
       }
+    } else {
+      // We couldn't find another bar
+      dispatch(receiveBarFailed());
     }
   };
 }
