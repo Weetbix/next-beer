@@ -9,9 +9,10 @@ import Text from './Text';
 
 const style = {
   container: {
-    marginTop: 10,
-    marginBottom: 15,
+    paddingTop: 10,
+    paddingBottom: 15,
     flexDirection: 'row',
+    justifyContent: 'space-between',
   },
   switch: {
     onTintColor: COLOR_HIGHLIGHT_LIGHT,
@@ -22,13 +23,12 @@ const style = {
 
 export default class Switch extends React.Component {
   render() {
-    const {label} = this.props;
+    const {label, containerStyle = {}} = this.props;
 
     const switchProps = {...this.props};
     delete switchProps.label;
-
     return (
-      <View style={style.container}>
+      <View style={{...style.container, ...containerStyle}}>
         <Text>
           {label}
         </Text>

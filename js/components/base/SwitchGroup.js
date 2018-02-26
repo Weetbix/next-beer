@@ -9,6 +9,15 @@ const style = {
     marginTop: 10,
     marginBottom: 15,
   },
+  switchContainer: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+  },
+  switch: {
+    width: '40%',
+    marginLeft: '5%',
+    marginRight: '5%',
+  },
 };
 
 export default class SwitchGroup extends React.Component {
@@ -29,6 +38,7 @@ export default class SwitchGroup extends React.Component {
         key={item.id}
         label={item.label}
         value={item.value}
+        containerStyle={style.switch}
         onValueChange={value =>
           this.onSwitchValueChange.call(this, item.id, value)}
       />
@@ -39,7 +49,9 @@ export default class SwitchGroup extends React.Component {
         <Text>
           {label}
         </Text>
-        {switches}
+        <View style={style.switchContainer}>
+          {switches}
+        </View>
       </View>
     );
   }
