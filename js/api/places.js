@@ -4,11 +4,11 @@ export async function getNextBar(currentLocation) {
   const location = `${currentLocation.latitude},${currentLocation.longitude}`;
 
   try {
-    let resp = await fetch(
+    const resp = await fetch(
       `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${location}&rankby=distance&type=bar&key=${PlacesAPI.key}`,
     );
 
-    let respJson = await resp.json();
+    const respJson = await resp.json();
 
     if (respJson && respJson.results) {
       // todo, filter by open now
