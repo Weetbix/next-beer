@@ -1,25 +1,19 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {
-  Button,
-  View,
-  Alert,
-  Text,
-  Platform,
-  StatusBar,
-  Switch,
-} from 'react-native';
+import {Button, View, Alert, Text, Platform, StatusBar} from 'react-native';
 
 import * as Constants from '../constants';
+import {COLOR_BACKGROUND} from '../components/base/constants';
 import HeaderText from '../components/base/HeaderText';
 import Slider from '../components/base/Slider';
+import SwitchGroup from '../components/base/SwitchGroup';
 
 import * as SettingsActions from '../actions/settings';
 import {resetStore} from '../actions/reset';
 
 const style = {
   container: {
-    backgroundColor: '#333',
+    backgroundColor: COLOR_BACKGROUND,
     flex: 1,
     padding: 20,
     paddingTop: Platform.OS === 'ios' ? 20 : StatusBar.currentHeight + 20,
@@ -30,12 +24,6 @@ const style = {
   headerText: {
     fontSize: 20,
     fontStyle: 'bold',
-  },
-  setting: {
-    alignItems: 'center',
-    flexDirection: 'row',
-    height: 40,
-    backgroundColor: 'red',
   },
 };
 
@@ -52,6 +40,7 @@ class Settings extends React.Component {
     const {
       minimumBarDistance,
       maximumBarDistance,
+      filterBarTypes,
     } = this.props;
 
     return (
@@ -74,6 +63,11 @@ class Settings extends React.Component {
           step={DISTANCE_STEP}
           onValueChange={val => this.props.setMaximumBarDistance(val)}
         />
+        <SwitchGroup
+          label="Exclude bars with these labels:"
+          value={filterBarTypes}
+          onValueChange={val => this.props.setFilteredBarTypes(val)}
+        />
         <Button title="Reset App" onPress={() => this.props.resetStore()} />
       </View>
     );
@@ -85,6 +79,7 @@ function mapStateToProps(state) {
   return {
     minimumBarDistance: settings.minimumBarDistance,
     maximumBarDistance: settings.maximumBarDistance,
+    filterBarTypes: settings.filterBarTypes,
   };
 }
 
@@ -94,6 +89,8 @@ function mapDispatchToProps(dispatch) {
       dispatch(SettingsActions.setMinimumBarDistance(metres)),
     setMaximumBarDistance: metres =>
       dispatch(SettingsActions.setMaximumBarDistance(metres)),
+    setFilteredBarTypes: filteredBars =>
+      dispatch(SettingsActions.setFilteredBarTypes(filteredBars)),
     resetStore: () => dispatch(resetStore()),
   };
 }

@@ -21,3 +21,11 @@ export function setMaximumBarDistance(metres) {
       : metres,
   };
 }
+
+export function setFilteredBarTypes(filteredBars) {
+  return {
+    type: UPDATE_SETTING,
+    key: 'filterBarTypes',
+    value: filteredBars,
+  };
+}
