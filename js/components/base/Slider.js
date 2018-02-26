@@ -1,6 +1,7 @@
 import React from 'react';
 import {View, Slider as NativeSlider} from 'react-native';
 import Text from './Text';
+import {COLOR_HIGHLIGHT} from './constants';
 
 const style = {
   container: {
@@ -31,8 +32,8 @@ export default class Slider extends React.Component {
         </Text>
         <NativeSlider
           {...sliderProps}
-          thumbTintColor={'#2096f2'}
-          minimumTrackTintColor={'#2096f2'}
+          thumbTintColor={COLOR_HIGHLIGHT}
+          minimumTrackTintColor={COLOR_HIGHLIGHT}
           style={style.slider}
         />
       </View>
