@@ -3,8 +3,10 @@ import PlacesAPI from './places.api.key';
 export async function getNextBar(
   currentLocation,
   excludeTags = [],
-  minDistance = 0,
-  maxDistance = 1000000,
+  minimumRating = 0,
+  maximumRating = 5,
+  minimumPrice = 1,
+  maximumPrice = 4,
 ) {
   const location = `${currentLocation.latitude},${currentLocation.longitude}`;
 
@@ -34,6 +36,10 @@ export async function getNextBar(
             !result.types ||
             excludeTags.every(tag => !result.types.includes(tag)),
         );
+      // .filter(
+      //   result =>
+
+      // )
 
       // take randomly from the top 5
       const index = Math.floor(Math.random() * 5);

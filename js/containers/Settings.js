@@ -37,9 +37,16 @@ function formatDistance(metres) {
 class Settings extends React.Component {
   render() {
     const DISTANCE_STEP = 100;
+    const PRICE_STEP = 1;
+    const RATING_STEP = 0.1;
+
     const {
       minimumBarDistance,
       maximumBarDistance,
+      minimumBarPrice,
+      maximumBarPrice,
+      minimumBarRating,
+      maximumBarRating,
       filterBarTypes,
     } = this.props;
 
@@ -63,6 +70,38 @@ class Settings extends React.Component {
           step={DISTANCE_STEP}
           onValueChange={val => this.props.setMaximumBarDistance(val)}
         />
+        <Slider
+          label="Minimum bar price"
+          value={minimumBarPrice}
+          minimumValue={Constants.MIN_BAR_PRICE}
+          maximumValue={maximumBarPrice}
+          step={PRICE_STEP}
+          onValueChange={val => this.props.setMinimumBarPrice(val)}
+        />
+        <Slider
+          label="Maximum bar price"
+          value={maximumBarPrice}
+          minimumValue={minimumBarPrice}
+          maximumValue={Constants.MAX_BAR_PRICE}
+          step={PRICE_STEP}
+          onValueChange={val => this.props.setMaximumBarPrice(val)}
+        />
+        <Slider
+          label="Minimum bar rating"
+          value={minimumBarRating}
+          minimumValue={Constants.MIN_BAR_RATING}
+          maximumValue={maximumBarRating}
+          step={RATING_STEP}
+          onValueChange={val => this.props.setMinimumBarRating(val)}
+        />
+        <Slider
+          label="Maximum bar rating"
+          value={maximumBarRating}
+          minimumValue={minimumBarRating}
+          maximumValue={Constants.MAX_BAR_RATING}
+          step={RATING_STEP}
+          onValueChange={val => this.props.setMaximumBarRating(val)}
+        />
         <SwitchGroup
           label="Exclude bars with these labels:"
           value={filterBarTypes}
@@ -79,6 +118,10 @@ function mapStateToProps(state) {
   return {
     minimumBarDistance: settings.minimumBarDistance,
     maximumBarDistance: settings.maximumBarDistance,
+    minimumBarRating: settings.minimumBarRating,
+    maximumBarRating: settings.maximumBarRating,
+    minimumBarPrice: settings.minimumBarPrice,
+    maximumBarPrice: settings.maximumBarPrice,
     filterBarTypes: settings.filterBarTypes,
   };
 }
@@ -89,6 +132,14 @@ function mapDispatchToProps(dispatch) {
       dispatch(SettingsActions.setMinimumBarDistance(metres)),
     setMaximumBarDistance: metres =>
       dispatch(SettingsActions.setMaximumBarDistance(metres)),
+    setMinimumBarRating: rating =>
+      dispatch(SettingsActions.setMinimumBarRating(rating)),
+    setMaximumBarRating: rating =>
+      dispatch(SettingsActions.setMaximumBarRating(rating)),
+    setMinimumBarPrice: price =>
+      dispatch(SettingsActions.setMinimumBarPrice(price)),
+    setMaximumBarPrice: price =>
+      dispatch(SettingsActions.setMaximumBarPrice(price)),
     setFilteredBarTypes: filteredBars =>
       dispatch(SettingsActions.setFilteredBarTypes(filteredBars)),
     resetStore: () => dispatch(resetStore()),
