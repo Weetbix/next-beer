@@ -72,7 +72,7 @@ class App extends React.Component {
   }
 
   render() {
-    const {location, bar} = this.props;
+    const {location, bar, settings} = this.props;
 
     // Hang on the app loading page until we fetch the location
     if (location === null) {
@@ -116,7 +116,7 @@ class App extends React.Component {
               <Button
                 title="Go!"
                 disabled={this.props.bar.isFetching}
-                onPress={() => this.props.navigateToNextBar(location)}
+                onPress={() => this.props.navigateToNextBar(location, settings)}
               />
             </View>
           </View>
@@ -130,14 +130,17 @@ function mapStateToProps(state) {
   return {
     bar: state.bar,
     location: state.location,
+    settings: state.settings,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     updateUserPosition: position => dispatch(updateLocation(position)),
-    navigateToNextBar: currentLocation =>
-      dispatch(BarActions.navigateToNextBar(currentLocation)),
+    navigateToNextBar: (currentLocation, settings) =>
+      dispatch(
+        BarActions.navigateToNextBarWithSettings(currentLocation, settings),
+      ),
   };
 }
 

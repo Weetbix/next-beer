@@ -26,10 +26,20 @@ export function receiveBarFailed() {
   };
 }
 
-export function navigateToNextBar(currentLocation) {
+export function navigateToNextBarWithSettings(currentLocation, settings) {
+  const {
+    minimumBarDistance,
+    maximumBarDistance,
+    filterBarTypes,
+  } = settings;
+
+  return navigateToNextBar(currentLocation, filterBarTypes);
+}
+
+export function navigateToNextBar(currentLocation, excludeTags) {
   return async dispatch => {
     dispatch(requestBar());
-    const nextBar = await getNextBar(currentLocation);
+    const nextBar = await getNextBar(currentLocation, excludeTags);
 
     if (nextBar) {
       try {
