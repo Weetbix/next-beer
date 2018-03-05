@@ -35,11 +35,18 @@ export async function getNextBar(
           result =>
             !result.types ||
             excludeTags.every(tag => !result.types.includes(tag)),
+        )
+        .filter(
+          result =>
+            !result.rating ||
+            (result.rating >= minimumRating && result.rating <= maximumRating),
+        )
+        .filter(
+          result =>
+            !result.price_level ||
+            (result.price_level >= minimumPrice &&
+              result.price_level <= maximumPrice),
         );
-      // .filter(
-      //   result =>
-
-      // )
 
       // take randomly from the top 5
       const index = Math.floor(Math.random() * 5);

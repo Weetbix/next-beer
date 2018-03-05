@@ -30,16 +30,41 @@ export function navigateToNextBarWithSettings(currentLocation, settings) {
   const {
     minimumBarDistance,
     maximumBarDistance,
+    minimumBarRating,
+    maximumBarRating,
+    minimumBarPrice,
+    maximumBarPrice,
     filterBarTypes,
   } = settings;
 
-  return navigateToNextBar(currentLocation, filterBarTypes);
+  return navigateToNextBar(
+    currentLocation,
+    filterBarTypes,
+    minimumBarRating,
+    maximumBarRating,
+    minimumBarPrice,
+    maximumBarPrice,
+  );
 }
 
-export function navigateToNextBar(currentLocation, excludeTags) {
+export function navigateToNextBar(
+  currentLocation,
+  excludeTags,
+  minRating,
+  maxRating,
+  minPrice,
+  maxPrice,
+) {
   return async dispatch => {
     dispatch(requestBar());
-    const nextBar = await getNextBar(currentLocation, excludeTags);
+    const nextBar = await getNextBar(
+      currentLocation,
+      excludeTags,
+      minRating,
+      maxRating,
+      minPrice,
+      maxPrice,
+    );
 
     if (nextBar) {
       try {
