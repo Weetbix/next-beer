@@ -16,7 +16,6 @@ const style = {
     backgroundColor: COLOR_BACKGROUND,
     flex: 1,
     padding: 20,
-    paddingTop: Platform.OS === 'ios' ? 20 : StatusBar.currentHeight + 20,
   },
   text: {
     color: 'white',
