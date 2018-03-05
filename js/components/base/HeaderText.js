@@ -1,6 +1,7 @@
 import React from 'react';
-import AppText from './Text';
+import PropTypes from 'prop-types';
 import {Text} from 'react-native';
+import AppText from './Text';
 
 export default function HeaderText(props) {
   const style = {
@@ -15,3 +16,8 @@ export default function HeaderText(props) {
     </AppText>
   );
 }
+
+HeaderText.propTypes = {
+  style: PropTypes.object,
+  children: PropTypes.node,
+};
