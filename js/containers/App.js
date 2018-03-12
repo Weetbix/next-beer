@@ -117,7 +117,7 @@ class App extends React.Component {
               <Button
                 title="Go!"
                 disabled={this.props.bar.isFetching}
-                onPress={() => this.props.navigateToNextBar(location, settings)}
+                onPress={() => this.props.navigateToNextBar()}
               />
             </View>
           </View>
@@ -138,10 +138,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     updateUserPosition: position => dispatch(updateLocation(position)),
-    navigateToNextBar: (currentLocation, settings) =>
-      dispatch(
-        BarActions.navigateToNextBarWithSettings(currentLocation, settings),
-      ),
+    navigateToNextBar: () => dispatch(BarActions.navigateToNextBar()),
   };
 }
 

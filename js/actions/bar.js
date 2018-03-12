@@ -26,49 +26,30 @@ export function receiveBarFailed() {
   };
 }
 
-// Helper action to convert the settings state to
-// a navigateToNextBar call
-export function navigateToNextBarWithSettings(currentLocation, settings) {
-  const {
-    minimumBarRating,
-    maximumBarRating,
-    minimumBarPrice,
-    maximumBarPrice,
-    filterBarTypes,
-  } = settings;
+export function navigateToNextBar() {
+  return async (dispatch, getState) => {
+    const state = getState();
+    const {
+      minimumBarRating,
+      maximumBarRating,
+      minimumBarPrice,
+      maximumBarPrice,
+      filterBarTypes,
+    } = state.settings;
+    // Convert the settings object to a list of exclude tags
+    const excludeTags = filterBarTypes
+      .filter(type => type.value === true)
+      .map(type => type.id);
+    const currentLocation = state.location;
 
-  // Convert the settings object to a list of exclude tags
-  const excludeTags = filterBarTypes
-    .filter(type => type.value === true)
-    .map(type => type.id);
-
-  return navigateToNextBar(
-    currentLocation,
-    excludeTags,
-    minimumBarRating,
-    maximumBarRating,
-    minimumBarPrice,
-    maximumBarPrice,
-  );
-}
-
-export function navigateToNextBar(
-  currentLocation,
-  excludeTags,
-  minRating,
-  maxRating,
-  minPrice,
-  maxPrice,
-) {
-  return async dispatch => {
     dispatch(requestBar());
     const nextBar = await getNextBar(
       currentLocation,
       excludeTags,
-      minRating,
-      maxRating,
-      minPrice,
-      maxPrice,
+      minimumBarRating,
+      maximumBarRating,
+      minimumBarPrice,
+      maximumBarPrice,
     );
 
     if (nextBar) {
