@@ -2,6 +2,7 @@ import PlacesAPI from './places.api.key';
 
 export async function getNextBar(
   currentLocation,
+  excludeNames = [],
   excludeTags = [],
   minimumRating = 0,
   maximumRating = 5,
@@ -27,6 +28,10 @@ export async function getNextBar(
             !result.opening_hours ||
             !result.opening_hours.open_now ||
             result.opening_hours.open_now,
+        )
+        .filter(
+          // Remove any excluded bar names (visited bars)
+          result => !excludeNames.includes(result.name),
         )
         .filter(
           // Remove any excluded types passed in

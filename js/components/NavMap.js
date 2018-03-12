@@ -79,7 +79,10 @@ export default class NavMap extends React.Component {
       >
         {previousPaths.map(path => (
           <MapView.Polyline
-            key={String(path[0].longitude) + String(path[0].latitude)}
+            key={
+              String(path[path.length - 1].longitude) +
+                String(path[path.length - 1].latitude)
+            }
             coordinates={path}
             strokeWidth={8}
             strokeColor="#99999977"

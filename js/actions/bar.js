@@ -42,11 +42,16 @@ export function navigateToNextBar() {
     const excludeTags = filterBarTypes
       .filter(type => type.value === true)
       .map(type => type.id);
+    const excludeBarNames = [
+      ...state.barHistory.map(previousBar => previousBar.name),
+      state.bar.name,
+    ];
     const currentLocation = state.location;
 
     dispatch(requestBar());
     const nextBar = await getNextBar(
       currentLocation,
+      excludeBarNames,
       excludeTags,
       minimumBarRating,
       maximumBarRating,
