@@ -50,7 +50,8 @@ class App extends React.Component {
     Location.watchPositionAsync(
       {
         enableHighAccuracy: true,
-        timeInterval: 100,
+        timeInterval: 3000,
+        distanceInterval: 10,
       },
       result => this.handleLocationEvent(result),
     );
