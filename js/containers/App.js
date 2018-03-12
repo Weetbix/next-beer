@@ -73,7 +73,7 @@ class App extends React.Component {
   }
 
   render() {
-    const {location, bar, settings} = this.props;
+    const {location, bar, barHistory, settings} = this.props;
 
     // Hang on the app loading page until we fetch the location
     if (location === null) {
@@ -85,6 +85,8 @@ class App extends React.Component {
       return <AppLoading />;
     }
 
+    const previousPaths = barHistory.map(previousBar => previousBar.points);
+
     return (
       <DrawerLayoutAndroid
         drawerWidth={300}
@@ -95,7 +97,8 @@ class App extends React.Component {
         <View style={style.container}>
           <NavMap
             initialCenter={location}
-            coords={bar.points}
+            currentPath={bar.points}
+            previousPaths={previousPaths}
             destination={bar.location}
           />
           <View style={{flexDirection: 'row'}}>
@@ -130,6 +133,7 @@ class App extends React.Component {
 function mapStateToProps(state) {
   return {
     bar: state.bar,
+    barHistory: state.barHistory,
     location: state.location,
     settings: state.settings,
   };

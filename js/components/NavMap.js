@@ -18,6 +18,8 @@ const COORDINATE_PROPTYPE = PropTypes.shape({
   latitude: PropTypes.number.isRequired,
 });
 
+const PATH_PROPTYPE = PropTypes.arrayOf(COORDINATE_PROPTYPE);
+
 export default class NavMap extends React.Component {
   static propTypes = {
     // The initial center for the map, this will only be
@@ -25,7 +27,8 @@ export default class NavMap extends React.Component {
     initialCenter: COORDINATE_PROPTYPE.isRequired,
 
     // An array of long/lat points which will be drawn on the map
-    coords: PropTypes.arrayOf(COORDINATE_PROPTYPE).isRequired,
+    currentPath: PATH_PROPTYPE.isRequired,
+    previousPaths: PropTypes.arrayOf(PATH_PROPTYPE),
 
     // The cooridnates of the destination
     destination: COORDINATE_PROPTYPE,
@@ -33,12 +36,12 @@ export default class NavMap extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     if (
-      !isEqual(this.props.coords, nextProps.coords) &&
-      nextProps.coords &&
-      nextProps.coords.length > 0
+      !isEqual(this.props.currentPath, nextProps.currentPath) &&
+      nextProps.currentPath &&
+      nextProps.currentPath.length > 0
     ) {
-      // fit to new coords
-      this.mapView.fitToCoordinates(nextProps.coords, {
+      // fit to new path
+      this.mapView.fitToCoordinates(nextProps.currentPath, {
         edgePadding: MAP_EDGE_PADDING,
         animated: true,
       });
@@ -48,7 +51,8 @@ export default class NavMap extends React.Component {
   render() {
     const {
       initialCenter,
-      coords,
+      currentPath,
+      previousPaths,
       destination,
     } = this.props;
 
@@ -60,7 +64,7 @@ export default class NavMap extends React.Component {
 
     // Create a path which joins the last point to the
     // actual destination point
-    const path = coords.length > 0 ? [...coords, destination] : [];
+    const path = currentPath.length > 0 ? [...currentPath, destination] : [];
 
     return (
       <MapView
@@ -73,7 +77,15 @@ export default class NavMap extends React.Component {
         showsMyLocationButton={false}
         initialRegion={initialRegion}
       >
-        {coords.length > 0 &&
+        {previousPaths.map(path => (
+          <MapView.Polyline
+            key={String(path[0].longitude) + String(path[0].latitude)}
+            coordinates={path}
+            strokeWidth={8}
+            strokeColor="#99999977"
+          />
+        ))}
+        {currentPath.length > 0 &&
           <MapView.Marker
             coordinate={destination}
             image={require('../../assets/beer.png')}
