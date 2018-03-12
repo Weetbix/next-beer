@@ -3,11 +3,13 @@ import {combineReducers} from 'redux';
 import {RESET_STORE} from '../actions/reset';
 
 import {bar} from './bar';
+import {barHistory} from './barHistory';
 import {location} from './location';
 import {settings} from './settings';
 
 const appReducer = combineReducers({
   bar,
+  barHistory,
   location,
   settings,
 });

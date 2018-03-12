@@ -1,6 +1,8 @@
 import {getDirections} from '../api/directions';
 import {getNextBar} from '../api/places';
 
+import {addBarToHistory} from './barHistory';
+
 export const REQUEST_BAR = 'REQUEST_BAR';
 export const RECEIVE_BAR = 'RECEIVE_BAR';
 export const RECEIVE_BAR_FAILED = 'RECEIVE_BAR_FAILED';
@@ -56,6 +58,14 @@ export function navigateToNextBar() {
       try {
         const {name, location: destination} = nextBar;
         const route = await getDirections(currentLocation, destination);
+
+        // Add the old bar to the history
+        if (state.bar.name) {
+          const {points, location, name} = state.bar;
+          dispatch(addBarToHistory(points, location, name));
+        }
+
+        // Show the new bar
         dispatch(receiveBar(route, destination, name));
       } catch (error) {
         // We couldn't find a path
