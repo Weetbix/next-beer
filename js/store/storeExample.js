@@ -18,7 +18,8 @@ store = {
   },
   // User settings
   settings: {
-    minimumBarDistance: 30, // metres
-    maximumBarDistance: 40,
+    minimumBarRating: 30,
+    maximumBarRating: 40,
+    // etc
   },
 };

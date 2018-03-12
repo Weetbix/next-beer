@@ -12,8 +12,6 @@ const DEFAULT_FILTER_BAR_TYPES = [
 
 // Default settings
 const defaultState = {
-  minimumBarDistance: Constants.MIN_BAR_DISTANCE,
-  maximumBarDistance: Constants.MAX_BAR_DISTANCE,
   minimumBarRating: Constants.MIN_BAR_RATING,
   maximumBarRating: Constants.MAX_BAR_RATING,
   minimumBarPrice: Constants.MIN_BAR_PRICE,

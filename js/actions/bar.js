@@ -30,8 +30,6 @@ export function receiveBarFailed() {
 // a navigateToNextBar call
 export function navigateToNextBarWithSettings(currentLocation, settings) {
   const {
-    minimumBarDistance,
-    maximumBarDistance,
     minimumBarRating,
     maximumBarRating,
     minimumBarPrice,

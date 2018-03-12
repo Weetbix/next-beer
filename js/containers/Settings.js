@@ -26,22 +26,12 @@ const style = {
   },
 };
 
-function formatDistance(metres) {
-  if (metres >= 1000) {
-    return `${(metres / 1000).toFixed(1)} km`;
-  }
-  return `${metres} m`;
-}
-
 class Settings extends React.Component {
   render() {
-    const DISTANCE_STEP = 100;
     const PRICE_STEP = 1;
     const RATING_STEP = 0.1;
 
     const {
-      minimumBarDistance,
-      maximumBarDistance,
       minimumBarPrice,
       maximumBarPrice,
       minimumBarRating,
@@ -51,24 +41,6 @@ class Settings extends React.Component {
 
     return (
       <View style={style.container}>
-        <Slider
-          label="Minimum bar distance"
-          value={minimumBarDistance}
-          minimumValue={Constants.MIN_BAR_DISTANCE}
-          maximumValue={maximumBarDistance}
-          formatValue={formatDistance}
-          step={DISTANCE_STEP}
-          onValueChange={val => this.props.setMinimumBarDistance(val)}
-        />
-        <Slider
-          label="Maximum bar distance"
-          value={maximumBarDistance}
-          minimumValue={minimumBarDistance}
-          maximumValue={Constants.MAX_BAR_DISTANCE}
-          formatValue={formatDistance}
-          step={DISTANCE_STEP}
-          onValueChange={val => this.props.setMaximumBarDistance(val)}
-        />
         <Slider
           label="Minimum bar price"
           value={minimumBarPrice}
@@ -115,8 +87,6 @@ class Settings extends React.Component {
 function mapStateToProps(state) {
   const {settings} = state;
   return {
-    minimumBarDistance: settings.minimumBarDistance,
-    maximumBarDistance: settings.maximumBarDistance,
     minimumBarRating: settings.minimumBarRating,
     maximumBarRating: settings.maximumBarRating,
     minimumBarPrice: settings.minimumBarPrice,
@@ -127,10 +97,6 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    setMinimumBarDistance: metres =>
-      dispatch(SettingsActions.setMinimumBarDistance(metres)),
-    setMaximumBarDistance: metres =>
-      dispatch(SettingsActions.setMaximumBarDistance(metres)),
     setMinimumBarRating: rating =>
       dispatch(SettingsActions.setMinimumBarRating(rating)),
     setMaximumBarRating: rating =>

@@ -1,8 +1,4 @@
-// Absolute minimum and maximum bar searching distance
-// regardless of the user settings
-export const MAX_BAR_DISTANCE = 3000;
-export const MIN_BAR_DISTANCE = 200;
-
+// Defaults for  bar rating and price settings
 export const MAX_BAR_RATING = 5;
 export const MIN_BAR_RATING = 1;
 
