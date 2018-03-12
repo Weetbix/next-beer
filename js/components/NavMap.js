@@ -48,11 +48,30 @@ export default class NavMap extends React.Component {
     }
   }
 
+  renderPreviousPaths() {
+    const {previousPaths} = this.props;
+
+    return previousPaths.map(path => {
+      const key = path.reduce(
+        (total, path) => total + path.longitude + path.latitude,
+        0.0,
+      );
+
+      return (
+        <MapView.Polyline
+          key={key}
+          coordinates={path}
+          strokeWidth={8}
+          strokeColor="#666666"
+        />
+      );
+    });
+  }
+
   render() {
     const {
       initialCenter,
       currentPath,
-      previousPaths,
       destination,
     } = this.props;
 
@@ -77,17 +96,7 @@ export default class NavMap extends React.Component {
         showsMyLocationButton={false}
         initialRegion={initialRegion}
       >
-        {previousPaths.map(path => (
-          <MapView.Polyline
-            key={
-              String(path[path.length - 1].longitude) +
-                String(path[path.length - 1].latitude)
-            }
-            coordinates={path}
-            strokeWidth={8}
-            strokeColor="#99999977"
-          />
-        ))}
+        {this.renderPreviousPaths()}
         {currentPath.length > 0 &&
           <MapView.Marker
             coordinate={destination}
