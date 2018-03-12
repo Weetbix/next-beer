@@ -26,6 +26,8 @@ export function receiveBarFailed() {
   };
 }
 
+// Helper action to convert the settings state to
+// a navigateToNextBar call
 export function navigateToNextBarWithSettings(currentLocation, settings) {
   const {
     minimumBarDistance,
@@ -37,9 +39,14 @@ export function navigateToNextBarWithSettings(currentLocation, settings) {
     filterBarTypes,
   } = settings;
 
+  // Convert the settings object to a list of exclude tags
+  const excludeTags = filterBarTypes
+    .filter(type => type.value === true)
+    .map(type => type.id);
+
   return navigateToNextBar(
     currentLocation,
-    filterBarTypes,
+    excludeTags,
     minimumBarRating,
     maximumBarRating,
     minimumBarPrice,

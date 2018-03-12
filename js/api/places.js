@@ -18,8 +18,6 @@ export async function getNextBar(
     const respJson = await resp.json();
 
     if (respJson && respJson.results) {
-      // console.log(JSON.stringify(respJson, null, 2));
-
       const results = respJson.results
         .filter(
           // Results may include opening  hours, if they do we should
@@ -34,7 +32,7 @@ export async function getNextBar(
           // Remove any excluded types passed in
           result =>
             !result.types ||
-            excludeTags.every(tag => !result.types.includes(tag)),
+            !excludeTags.some(tag => result.types.includes(tag)),
         )
         .filter(
           result =>
