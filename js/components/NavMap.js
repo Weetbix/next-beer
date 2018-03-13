@@ -51,7 +51,7 @@ export default class NavMap extends React.Component {
   renderPreviousPaths() {
     const {previousPaths} = this.props;
 
-    return previousPaths.map(path => {
+    const paths = previousPaths.map(path => {
       const key = path.reduce(
         (total, path) => total + path.longitude + path.latitude,
         0.0,
@@ -66,6 +66,20 @@ export default class NavMap extends React.Component {
         />
       );
     });
+
+    const markers = previousPaths.map(path => {
+      const coord = path[path.length - 1];
+      return (
+        <MapView.Marker
+          key={coord.longitude + coord.latitude}
+          coordinate={coord}
+          image={require('../../assets/beer-grayscale.png')}
+          anchor={{x: 0.5, y: 0.5}}
+        />
+      );
+    });
+
+    return [...paths, ...markers];
   }
 
   render() {
@@ -81,10 +95,6 @@ export default class NavMap extends React.Component {
       longitudeDelta: 0.01,
     };
 
-    // Create a path which joins the last point to the
-    // actual destination point
-    const path = currentPath.length > 0 ? [...currentPath, destination] : [];
-
     return (
       <MapView
         ref={c => {
@@ -99,18 +109,21 @@ export default class NavMap extends React.Component {
         {this.renderPreviousPaths()}
         {currentPath.length > 0 &&
           <MapView.Marker
-            coordinate={destination}
+            coordinate={currentPath[currentPath.length - 1]}
             image={require('../../assets/beer.png')}
             anchor={{x: 0.5, y: 0.5}}
+            zIndex={3}
           />}
         <MapView.Polyline
-          coordinates={path}
+          coordinates={currentPath}
           strokeWidth={8}
           strokeColor="#FFFFFF77"
+          zIndex={1}
         />
         <MapView.Polyline
-          coordinates={path}
+          coordinates={currentPath}
           strokeWidth={5}
+          zIndex={2}
           strokeColor="#f4ce42"
         />
       </MapView>

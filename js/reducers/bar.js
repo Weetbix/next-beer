@@ -10,7 +10,11 @@ export function bar(state = defaultState, action) {
     case Actions.RECEIVE_BAR:
       return {
         ...state,
-        ...action.route,
+        distance: action.route.distance,
+        duration: action.route.duration,
+        // Create a path which joins the last point to the
+        // actual destination point
+        points: [...action.route.points, action.location],
         location: action.location,
         name: action.name,
         isFetching: false,
