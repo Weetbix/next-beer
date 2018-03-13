@@ -16,6 +16,7 @@ const defaultState = {
   maximumBarRating: Constants.MAX_BAR_RATING,
   minimumBarPrice: Constants.MIN_BAR_PRICE,
   maximumBarPrice: Constants.MAX_BAR_PRICE,
+  distanceToSkip: Constants.DISTANCE_TO_SKIP,
   filterBarTypes: DEFAULT_FILTER_BAR_TYPES,
 };
 

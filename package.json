@@ -30,6 +30,7 @@
   "dependencies": {
     "@mapbox/polyline": "^0.2.0",
     "expo": "^25.0.0",
+    "geolib": "^2.0.24",
     "lodash": "^4.17.4",
     "react": "16.2.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-25.0.0.tar.gz",

@@ -39,6 +39,14 @@ export function setMaximumBarPrice(price) {
   };
 }
 
+export function setDistanceToSkip(distance) {
+  return {
+    type: UPDATE_SETTING,
+    key: 'distanceToSkip',
+    value: distance,
+  };
+}
+
 export function setFilteredBarTypes(filteredBars) {
   return {
     type: UPDATE_SETTING,

@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import {Location, Permissions, AppLoading} from 'expo';
 import {Ionicons} from '@expo/vector-icons';
+import {getDistance} from 'geolib';
 
 import Settings from './Settings';
 import NavMap from '../components/NavMap';
@@ -73,7 +74,7 @@ class App extends React.Component {
   }
 
   render() {
-    const {location, bar, barHistory, settings} = this.props;
+    const {location, bar, barHistory, distanceToSkip} = this.props;
 
     // Hang on the app loading page until we fetch the location
     if (location === null) {
@@ -86,6 +87,9 @@ class App extends React.Component {
     }
 
     const previousPaths = barHistory.map(previousBar => previousBar.points);
+
+    const canSkipBar = !bar.name ||
+      getDistance(location, bar.location, 1) < distanceToSkip;
 
     return (
       <DrawerLayoutAndroid
@@ -119,7 +123,7 @@ class App extends React.Component {
             <View style={{padding: 10}}>
               <Button
                 title="Go!"
-                disabled={this.props.bar.isFetching}
+                disabled={this.props.bar.isFetching || !canSkipBar}
                 onPress={() => this.props.navigateToNextBar()}
               />
             </View>
@@ -135,7 +139,7 @@ function mapStateToProps(state) {
     bar: state.bar,
     barHistory: state.barHistory,
     location: state.location,
-    settings: state.settings,
+    distanceToSkip: state.settings.distanceToSkip,
   };
 }
 
