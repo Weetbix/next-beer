@@ -5,8 +5,8 @@ This is a simple pub crawling app with one rule:
 Skipping is not allowed unless you are near the bar!
 
 <img src="https://user-images.githubusercontent.com/492636/45844486-e1d26580-bd22-11e8-90a8-0e588f234d75.png" width="300">
-<img src="https://user-images.githubusercontent.com/492636/45844528-029abb00-bd23-11e8-9c02-4019650179f6.png" width="300">
 <img src="https://user-images.githubusercontent.com/492636/45846372-e4838980-bd27-11e8-97c8-43d898970ee5.png" width="300">
+<img src="https://user-images.githubusercontent.com/492636/45844528-029abb00-bd23-11e8-9c02-4019650179f6.png" width="300">
 
 
 ## About
